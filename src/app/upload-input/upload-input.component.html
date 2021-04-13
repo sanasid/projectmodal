@@ -1,0 +1,46 @@
+<div class="card m-3">
+  <div class="card-body">
+    <form name="form" [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="form-group col">
+          <label>{{sourceDatabase}}</label>
+          <select name="input_database" class="form-control selectpicker" formControlName="input_database">
+            <option>Select source database</option>
+            <option *ngFor="let item of this.sourceData;let i = index" value="{{item.dbname}}">
+              {{item.dbname}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group col">
+          <label>{{targetDatabase}}</label>
+          <select name="output_database" class="form-control" formControlName="output_database">
+            <option>Select target database</option>
+            <option *ngFor="let item of this.targetData;let i = index" value="{{item.dbname}}">
+              {{item.dbname}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-row justify-content-center">
+          <div class="file-field">
+            <label for="fileUpload"></label>
+            <input type="file" name="files" (change)="onFileSelected($event)" formControlName="files" multiple
+              accept=".txt" (click)="flipout()"/>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-row justify-content-center">
+          <input type="text" placeholder="Or Paste the source DDL script manually here." class="edit"
+            formControlName="text" name="text" (click)="flip()" />
+        </div>
+      </div>
+      <button type="submit" mat-button class="btn btn-secondary float-right"
+        [disabled]="uploadForm.invalid" >NEXT</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- matStepperNext -->

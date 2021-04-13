@@ -1,0 +1,186 @@
+<div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-header text-left">
+          Source Components
+        </div>
+        <div class="card-body">
+
+
+<!-- <li><input type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll();">Table </li>
+<li *ngFor="let a of name">
+	<input type="checkbox" [(ngModel)]="a.selected" (change)="checkIfAllSelected()"> {{ a.name }}
+	<li>
+    <li><input type="checkbox" [(ngModel)]="Secondname.selected" (change)="selectAll();">Views</li>
+<li *ngFor="let b of Secondname">
+	<input type="checkbox"   [(ngModel)]="Secondname.selected" (change)="checkIfAllSelected()"> {{ b.name }}
+	<li>
+
+    <li><input type="checkbox" [(ngModel)]="Thirdname.selected" (change)="selectAll();">Database </li>
+<li *ngFor="let a of Thirdname">
+	<input type="checkbox" [(ngModel)]="Thirdname.selected" (change)="checkIfAllSelected()"> {{ a.name }}
+	<li>
+  -->
+
+
+
+
+   <ul >
+     <li class="tab">
+     <input type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll();" >Table</li>
+     <li *ngFor="let a of table let i = index"  (change)="addToAnotherTable(i)">
+      <input type="checkbox" [(ngModel)]="a.selected" > {{ a.name }}
+      <li>
+
+        <!-- <li class="tab">
+          <input type="checkbox" [(ngModel)]="Secondname.selected" (change)="selectAll();">Views</li>
+        <li *ngFor="let b of Secondname let i = index">
+          <input type="checkbox"   [(ngModel)]="Secondname.selected" (change)="addToAnotherTable(i)"> {{ b.name }}
+          <li>
+        
+            <li class="tab">
+              <input type="checkbox" [(ngModel)]="Thirdname.selected" (change)="selectAll();">Database </li>
+        <li *ngFor="let a of Thirdname">
+          <input type="checkbox" [(ngModel)]="Thirdname.selected" (change)="checkIfAllSelected()"> {{ a.name }}
+          <li> -->
+
+
+
+
+    <!-- <li *ngFor="let data of Table let i = index" >
+    <input type="checkbox" (change)=addToAnotherTable(i)/>{{data.name}} 
+    </li> -->
+  
+    </ul>
+    </div>
+    </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-header text-left">
+          Target Component
+        </div>
+        <div class="card-body">
+    <table class="table">
+      <thead>
+      
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let data of secondaryTable; index as i;">
+          <tr>
+            <ng-container>
+              <td>{{table[data].name}} </td>
+              <td *ngIf="enableEditIndex != i" class="table_col">
+                <span class="material-icons"  (click)="switchEditMode(i)">
+                  edit
+                  </span>
+                  <span class="material-icons" (click)="remove(i)">
+                    delete
+                    </span>
+                
+              </td>
+            </ng-container>
+
+            <!-- <ng-container>
+              <td>{{Secondname[data].name}} </td>
+              <td *ngIf="enableEditIndex != i" class="table_col">
+                <span class="material-icons"  (click)="switchEditMode(i)">
+                  edit
+                  </span>
+                  <span class="material-icons" (click)="remove(i)">
+                    delete
+                    </span>
+                
+              </td>
+            </ng-container> -->
+            <ng-container *ngIf="enableEditIndex == i">
+              <td><input [(ngModel)]="data.name" [ngModelOptions]="{ standalone: true }" /></td>
+              <td class="table_col"><span class="material-icons" (click)="save()">save</span>
+            
+              </td>
+             
+            </ng-container>
+          </tr>
+
+          
+        </ng-container>
+      </tbody>
+    </table> 
+  </div>
+  </div>
+  </div>
+
+
+
+
+  <!--<div class="col-sm-6">
+    <div class="card">
+      <div class="card-header text-left">
+        Target Component
+      </div>
+      <div class="card-body">
+ 
+
+  <table class="table">
+    <thead>
+    
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let data of secondaryTable; index as i;">
+        <tr>
+         
+          <ng-container *ngIf="enableEditIndex != i">
+            <td>{{Table[data].name}} </td>
+            <td *ngIf="enableEditIndex != i" class="table_col">
+              <span class="material-icons"  (click)="switchEditMode(i)">
+                edit
+                </span>
+                <span class="material-icons" (click)="remove(i)">
+                  delete
+                  </span>
+              
+            </td>
+          </ng-container>
+          <ng-container *ngIf="enableEditIndex == i">
+            <td><input [(ngModel)]="Table[data].name" [ngModelOptions]="{ standalone: true }" /></td>
+            <td class="table_col"><span class="material-icons" (click)="save()">save</span>
+          
+            </td>
+           
+          </ng-container>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table> 
+</div>
+</div>
+</div> -->
+
+
+<!-- <li><input type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll();">Table </li>
+<li *ngFor="let a of name">
+	<input type="checkbox" [(ngModel)]="a.selected" (change)="checkIfAllSelected()"> {{ a.name }}
+	<li>
+    <li><input type="checkbox" [(ngModel)]="Secondname.selected" (change)="selectAll();">Views</li>
+<li *ngFor="let b of Secondname">
+	<input type="checkbox"   [(ngModel)]="Secondname.selected" (change)="checkIfAllSelected()"> {{ b.name }}
+	<li>
+
+    <li><input type="checkbox" [(ngModel)]="Thirdname.selected" (change)="selectAll();">Database </li>
+<li *ngFor="let a of Thirdname">
+	<input type="checkbox" [(ngModel)]="Thirdname.selected" (change)="checkIfAllSelected()"> {{ a.name }}
+	<li>
+  -->
+
+		<!-- <li><input type="checkbox" (change)="selectAllSecondname();">Select All </li>
+		<li *ngFor="let a of Secondname">
+			<input type="checkbox"  (change)="checkIfAllSecondnameSelected()"> {{ a.name }}
+			<li>
+
+				<li *ngFor="let a of Thirdname">
+					<input type="checkbox"  (change)="checkIfAllSecondnameSelected()"> {{ a.name }}
+					<li> -->
+
+
+            

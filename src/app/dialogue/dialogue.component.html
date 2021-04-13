@@ -1,0 +1,60 @@
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.animal">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</div> -->
+
+<form 
+  [formGroup]="phaseForm" 
+  class="xx" 
+  novalidate 
+  (ngSubmit)="onSubmit()">
+  <div formGroupName="phaseExecutions">
+    <div formArrayName="PRE">
+      <div>
+        <button 
+          type="button" 
+          class="btnshow" 
+          (click)="addMorePhase()">
+          <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        </button>  
+        <div class="row ">
+          <label class="col-sm-4">Column Name</label> 
+          <label class="col-sm-4">Column Type</label>
+            <label class="col-sm-4">Allow Null</label>
+        </div>
+        <div class="row space" *ngFor="let phase of phaseArray.controls; let i = index;" 
+        [formGroupName]="i">                    
+          <input 
+            type="text" 
+            class="form-control col-sm-4" 
+            formControlName="animal" placeholder="Column Name" [(ngModel)]="data.animal"/> 
+            <select class="form-control col-sm-4" 
+            formControlName="animalo"  [(ngModel)]="data.animalo"> 
+            <option value="">Column Type</option>
+            <option value="Date&Time">Date&Time</option>
+            <option value="Varchar2">Varchar2</option>
+            <option value="Integer">Integer</option>                    
+          </select>  
+            <input 
+              type="checkbox" 
+              class="form-control col-sm-2 check" 
+              formControlName="animalt"  [(ngModel)]="data.animalt">
+              
+              <button type="button" 
+              class="btnshow1"(click)="removePhone(i)">
+              <i class="fa fa-minus-circle" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-primary but" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</form>

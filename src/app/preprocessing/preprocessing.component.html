@@ -1,0 +1,46 @@
+<div class="card m-3">
+    <div class="card-body">
+      
+            <form name="form" [formGroup]="processingForm" (ngSubmit)="processingData();">
+              <div class="container">
+                <div class="row">
+                  <label class="col-6">Audit Columns to add after conversation in script?</label>
+                  <label class="col-2"> Specific tables<input type="radio"  (click)="toggleSpecific()" 
+                  >
+                    <div *ngIf="isSpecific" id="divshow" style="float: right;">
+                    <textarea placeholder="If Specific tables, then please mention the tables name (comma separated) for which Audit Columns need to be added.
+                    " contentEditable="true"  formControlName="specific"
+              class="editSpecific"></textarea>
+              <button type="submit" class="btn btn-danger" (click)="openDialog()" >Add Audit Columns</button>
+
+            </div>
+                  </label>
+                  <label class="col-2">All tables
+                    <input type="radio"  (click)="toggleShow()" formControlName="all" >
+                    <div *ngIf="isShown" id="divshow" style="float:right;" >
+                      <button type="submit" class="btn btn-danger" (click)="openDialog()" >Add Audit Columns</button>
+                      </div>
+                  </label>
+                  <label class="col-2"> No<input type="radio" name="no" formControlName="no"></label>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                    <label class="col-8">Any constraints in DDL Script that need to handle and check?</label>
+                    <label class="col-2"> Yes<input type="radio" (click)="toggleYes()" name="group2">
+                      <div *ngIf="isYes" id="divshow" style="float: right;" >
+                        <textarea data-tip="This is the text of the tooltip" placeholder="Please share the list of constraints for which needs to be handled." contentEditable="true"
+                  class="editSpecific" formControlName="yes"></textarea>
+                </div>
+                    </label>
+                    <label class="col-2"> No<input type="radio" name="group2"></label>
+                </div>
+              </div>
+                
+        <button mat-button class="btn btn-secondary float-right" [disabled]="!processingForm.valid" (click)="onSubmit()">NEXT</button>
+        <button mat-button matStepperPrevious class="btn btn-light float-right mr-3">Back</button>
+        
+      </form>
+    </div>
+  </div>
+

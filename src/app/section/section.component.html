@@ -1,0 +1,23 @@
+<div class="jumbotron">
+  <div class="container text-center box">
+    <mat-horizontal-stepper>
+      <mat-step label="Upload Input Scripts">
+        <app-parse-schema></app-parse-schema>
+        <!-- <app-preprocessing></app-preprocessing> -->
+       <!-- <app-upload-input></app-upload-input> -->
+      </mat-step>
+      <mat-step label="Pre Processing">
+        <app-preprocessing></app-preprocessing>
+      </mat-step>
+      <mat-step label="Parse existing schema">
+        <app-preprocessing></app-preprocessing>
+        <!-- <p>Step 3</p>
+        <button mat-button matStepperNext>Next</button> -->
+      </mat-step>
+      <mat-step label="Convert and Save">
+        <p>Step 4</p>
+        <button mat-button matStepperNext>Next</button>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>

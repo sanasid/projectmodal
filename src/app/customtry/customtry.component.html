@@ -1,0 +1,91 @@
+      <!-- <div class="input-group mb-3" novalidate [formGroup]="formImport">
+    
+    <div class="custom-file">
+      <input type="file" class="custom-file-input" multiple formControlName="importFile" id="importFile" (change)="onFileChange($event.target.files)" multiple>
+                    <label class="custom-file-label" #labelImport for="importFile"><i class="fas fa-search"></i> Choose file</label>
+    </div>
+  </div> -->
+
+  <!-- <form [formGroup]="checkoutForm" (ngSubmit)="postData();">
+    <div class="form-group row">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">select source database</label>
+      <select name="title" class="form-control selectpicker" formControlName="source">
+        <option>Select source database</option>
+        <option>a</option>
+        <option>b</option>
+        <option>c</option>
+      </select> -->
+      <!-- <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="inputEmail3" placeholder="Email" formControlName="emailAddr">
+      </div> -->
+    <!-- </div>
+    <div class="form-group row">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">select image</label>
+      <div class="col-sm-10"> -->
+         <!-- <div class="input-group mb-3" novalidate >
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" multiple formControlName="selectData" id="selectData"
+                        (change)="onFileChange($event.target.files)" multiple accept=".png, .jpg, .jpeg">
+                      <label class="custom-file-label" #labelImport for="selectData"><i class="fas fa-search"></i>
+                        Upload single or multiple files here</label>
+                    </div>
+                  </div> -->
+        <!-- <input type ="file" (change)="save($event)" multiple accept=".png, .jpg, .jpeg" formControlName="selectData"/>  -->
+        <!-- <input type="text" class="form-control" id="inputPassword3" placeholder="Password" formControlName="quantity"> -->
+      <!-- </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="gridCheck1" formControlName="terms">
+          <label class="form-check-label" for="gridCheck1">
+            Agree to terms
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <button type="submit" class="btn btn-primary" [disabled]="!checkoutForm.valid"> Sign in</button>
+      </div>
+    </div>
+  </form> -->
+
+<!-- <h3>Checkbox condition</h3>
+<input (click)="toggleShow()" type="checkbox" name="scales" >
+
+<div *ngIf="isShown" class="row container-fluid"  id="divshow" >
+Div Content
+
+</div> -->
+
+<!-- <h3>Disable button</h3>
+<input type="file" [disabled]=!isDisabled />
+   <textarea (mouseover)="flip()"> gdgdkgdkgd</textarea> -->
+
+   <div class="container">
+    <table class="table table-responsive table-striped">
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>year</th>
+      </tr>
+      <tr *ngFor="let row of rows">
+        <td>{{row.id}}</td>
+        <td>{{row.name}}</td>
+        <td>{{row.year}}</td>
+      </tr>
+    </table>
+    <div>
+  
+    <hr />
+    <input type="text" [(ngModel)]="id" placeholder="id" />
+    <input type="text" [(ngModel)]="name" placeholder="name" />
+    <input type="text" [(ngModel)]="year" placeholder="year" />
+  
+    <button (click)="buttonClicked()">Click to Insert New Row</button>
+   
+    
+  

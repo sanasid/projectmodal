@@ -1,0 +1,47 @@
+
+<div class="container">
+    <div class="row">
+
+  
+<form #addressForm="ngForm" class="container mt-3" (ngSubmit)="logValue()">
+    <div class="row justify-content-center">
+      <!-- <div class="col-6"> -->
+          <button type="button" class="btn btn-primary mb-2" (click)="addAddress()">Add Address</button>
+        <section class="container border mb-4 p-3" *ngFor="let address of addresses; let i = index;">
+          <!-- <div class="row">
+            <div class="col-6">
+                 <h4>Address {{i + 1}}</h4>
+            </div> -->
+            <div class="row ">
+                <label class="col-sm-4">Column Name</label> 
+                <!-- <label class="col-sm-4">Column Type</label>
+                  <label class="col-sm-4">Allow Null</label> -->
+              </div>
+            <!-- <div class="col-6 text-right">
+                <button type="button" class="btn btn-danger btn-sm" (click)="removeAddress(i)">Remove</button>
+            </div> -->
+          <!-- </div> -->
+          <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <!-- <label>Custom Name</label> -->
+                    <input type="text" class="form-control" [(ngModel)]="address.address"
+                    name="address_{{address.id}}" placeholder="St. Thomas Apartment"/>
+                  </div>
+            </div>
+          </div>
+        </section>
+  
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary but" [mat-dialog-close]="data" 
+            (click)="onSubmit()" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+        </div>
+        
+      </div>
+  
+  
+  </form>
+</div>
+</div>
+

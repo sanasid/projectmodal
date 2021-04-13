@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-header text-left">
+        Source Components Try
+      </div>
+      <div class="card-body">
+    <ul>
+     
+      <li class="tab">Table</li>
+      <li 
+        *ngFor="let item of table" 
+        [class.item-selected]="item.selected"
+        (click)="toggleSelection(item, 1)">{{item.text}}</li>
+
+        <li class="tab">Views</li>
+        <li 
+          *ngFor="let item of views" 
+          [class.item-selected]="item.selected"
+          (click)="toggleSelection(item, 1)">{{item.text}}</li>
+            <li class="tab">Schema</li>
+            <li 
+              *ngFor="let item of schema" 
+              [class.item-selected]="item.selected"
+              (click)="toggleSelection(item, 1)">{{item.text}}</li>
+
+              <li class="tab">Database</li>
+              <li 
+                *ngFor="let item of database" 
+                [class.item-selected]="item.selected"
+                (click)="toggleSelection(item, 1)">{{item.text}}</li>
+
+                <li 
+                *ngFor="let item of summary" 
+                (click)="toggleSelection(item, 1)">{{item.table}}</li>
+    </ul>
+  </div>
+  </div>
+  </div>
+
+
+  <div class="col-sm-6 cen">
+    <div class="flex-parent jc-center ">
+      <button type="submit" class="btn btn-primary" (click)="moveSelected('right')">Move Single</button>
+    </div>
+    <div class="flex-parent jc-center">
+      <button type="submit" class="btn btn-primary" (click)="moveAll('right')">Move All</button>
+    </div>
+  </div>
+
+
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-header text-left">
+        Target Components
+      </div>
+      <div class="card-body">
+
+    <ul >
+      <li class="tab">Table</li>
+      <li class="tab">Views</li>
+      <li class="tab">Databases</li>
+      <li class="tab">Schemas</li>
+      <li *ngFor="let item of list2; index as i;" [class.item-selected]="item.selected"
+        (click)="toggleSelection(item, 1)">{{item.text}}
+       
+        <span *ngIf="enableEditIndex != i" class="material-icons" (click)="switchEditMode(i) ">
+          edit
+          </span>
+          <span *ngIf="enableEditIndex != i" class="material-icons" (click)="remove(i)">
+            deletes
+            </span>
+          </li>
+    </ul>
+  </div>
+  </div>
+  </div>
+  </div>
+
