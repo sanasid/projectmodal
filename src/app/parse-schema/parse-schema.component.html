@@ -1,80 +1,161 @@
 <div class="row">
   <div class="col-sm-6">
     <div class="card">
-      <div class="card-header text-left">
-        Source Components Try
+      <div class="card-header text-left">Source Components Try</div>
+      <div class="card-body" *ngIf="summary">
+        <ul>
+          <li class="tab">Table</li>
+          <li
+            *ngFor="let item of summary[0].table"
+            [ngClass]="{ 'item-selected': item == singleSelect }"
+            (click)="toggleSelection(item, 'table')"
+          >
+            {{ item }}
+          </li>
+
+          <li class="tab">Views</li>
+          <li
+            *ngFor="let item of summary[3].view"
+            [ngClass]="{ 'item-selected': item == singleSelect }"
+            (click)="toggleSelection(item, 'view')"
+          >
+            {{ item }}
+          </li>
+          <li class="tab">Schema</li>
+          <li
+            *ngFor="let item of summary[2].schema"
+            [ngClass]="{ 'item-selected': item == singleSelect }"
+            (click)="toggleSelection(item, 'schema')"
+          >
+            {{ item }}
+          </li>
+
+          <li class="tab">Database</li>
+          <li
+            *ngFor="let item of summary[1].database"
+            [ngClass]="{ 'item-selected': item == singleSelect }"
+            (click)="toggleSelection(item, 'database')"
+          >
+            {{ item }}
+          </li>
+        </ul>
       </div>
-      <div class="card-body">
-    <ul>
-     
-      <li class="tab">Table</li>
-      <li 
-        *ngFor="let item of table" 
-        [class.item-selected]="item.selected"
-        (click)="toggleSelection(item, 1)">{{item.text}}</li>
-
-        <li class="tab">Views</li>
-        <li 
-          *ngFor="let item of views" 
-          [class.item-selected]="item.selected"
-          (click)="toggleSelection(item, 1)">{{item.text}}</li>
-            <li class="tab">Schema</li>
-            <li 
-              *ngFor="let item of schema" 
-              [class.item-selected]="item.selected"
-              (click)="toggleSelection(item, 1)">{{item.text}}</li>
-
-              <li class="tab">Database</li>
-              <li 
-                *ngFor="let item of database" 
-                [class.item-selected]="item.selected"
-                (click)="toggleSelection(item, 1)">{{item.text}}</li>
-
-                <li 
-                *ngFor="let item of summary" 
-                (click)="toggleSelection(item, 1)">{{item.table}}</li>
-    </ul>
+    </div>
   </div>
-  </div>
-  </div>
-
 
   <div class="col-sm-6 cen">
-    <div class="flex-parent jc-center ">
-      <button type="submit" class="btn btn-primary" (click)="moveSelected('right')">Move Single</button>
+    <div class="flex-parent jc-center">
+      <button type="button" class="btn btn-primary" (click)="moveSelected()">
+        Move Single
+      </button>
     </div>
     <div class="flex-parent jc-center">
-      <button type="submit" class="btn btn-primary" (click)="moveAll('right')">Move All</button>
+      <button type="button" class="btn btn-primary" (click)="moveAll()">
+        Move All
+      </button>
+    </div>
+    <div class="flex-parent jc-center">
+      <button type="button" class="btn btn-primary" (click)="moveToSource()">
+        Move to source table
+      </button>
     </div>
   </div>
-
-
-
   <div class="col-sm-6">
     <div class="card">
-      <div class="card-header text-left">
-        Target Components
-      </div>
+      <div class="card-header text-left">Target Components</div>
       <div class="card-body">
-
-    <ul >
-      <li class="tab">Table</li>
-      <li class="tab">Views</li>
-      <li class="tab">Databases</li>
-      <li class="tab">Schemas</li>
-      <li *ngFor="let item of list2; index as i;" [class.item-selected]="item.selected"
-        (click)="toggleSelection(item, 1)">{{item.text}}
-       
-        <span *ngIf="enableEditIndex != i" class="material-icons" (click)="switchEditMode(i) ">
-          edit
-          </span>
-          <span *ngIf="enableEditIndex != i" class="material-icons" (click)="remove(i)">
-            deletes
+        <ul>
+          <li class="tab">Table</li>
+          <li *ngFor="let item of summary2[0].table; let i = index">
+            <span *ngIf="!isEditing">{{ item }}</span>
+            <input *ngIf="isEditing" type="text" [(ngModel)]="editingItem" />
+            <span
+              *ngIf="isEditing"
+              class="material-icons"
+              (click)="save(i, 'table')"
+            >
+              save
+            </span>
+            <span
+              *ngIf="!isEditing"
+              class="material-icons"
+              (click)="switchEditMode(i, 'table')"
+            >
+              edit
+            </span>
+            <span class="material-icons" (click)="remove(i, 'table')">
+              deletes
             </span>
           </li>
-    </ul>
-  </div>
-  </div>
-  </div>
-  </div>
+          <li class="tab">Views</li>
+          <li *ngFor="let item of summary2[3].view; let i = index">
+            <span *ngIf="!isEditing">{{ item }}</span>
+            <input *ngIf="isEditing" type="text" [(ngModel)]="editingItem" />
+            <span
+              *ngIf="isEditing"
+              class="material-icons"
+              (click)="save(i, 'view')"
+            >
+              save
+            </span>
+            <span
+              *ngIf="!isEditing"
+              class="material-icons"
+              (click)="switchEditMode(i, 'view')"
+            >
+              edit
+            </span>
+            <span class="material-icons" (click)="remove(i, 'view')">
+              deletes
+            </span>
+          </li>
+          <li class="tab">Schema</li>
+          <li *ngFor="let item of summary2[2].schema; let i = index">
+            <span *ngIf="!isEditing">{{ item }}</span>
+            <input *ngIf="isEditing" type="text" [(ngModel)]="editingItem" />
+            <span
+              *ngIf="isEditing"
+              class="material-icons"
+              (click)="save(i, 'schema')"
+            >
+              save
+            </span>
+            <span
+              *ngIf="!isEditing"
+              class="material-icons"
+              (click)="switchEditMode(i, 'schema')"
+            >
+              edit
+            </span>
+            <span class="material-icons" (click)="remove(i, 'schema')">
+              deletes
+            </span>
+          </li>
 
+          <li class="tab">Database</li>
+          <li *ngFor="let item of summary2[1].database; let i = index">
+            <span *ngIf="!isEditing">{{ item }}</span>
+            <input *ngIf="isEditing" type="text" [(ngModel)]="editingItem" />
+            <span
+              *ngIf="isEditing"
+              class="material-icons"
+              (click)="save(i, 'database')"
+            >
+              save
+            </span>
+            <span
+              *ngIf="!isEditing"
+              class="material-icons"
+              (click)="switchEditMode(i, 'database')"
+            >
+              edit
+            </span>
+            <span class="material-icons" (click)="remove(i, 'database')">
+              deletes
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
