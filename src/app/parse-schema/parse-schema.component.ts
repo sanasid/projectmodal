@@ -1,145 +1,100 @@
 import { summaryFileName } from '@angular/compiler/src/aot/util';
 import { Component, OnInit } from '@angular/core';
-
+const initialSummary: any = [
+  {
+    table: [],
+  },
+  {
+    database: [],
+  },
+  {
+    schema: [],
+  },
+  {
+    view: [],
+  },
+];
 @Component({
   selector: 'app-parse-schema',
   templateUrl: './parse-schema.component.html',
-  styleUrls: ['./parse-schema.component.scss']
+  styleUrls: ['./parse-schema.component.scss'],
 })
 export class ParseSchemaComponent implements OnInit {
-
-  // this is not actual data to show please check constructor to show the actual data in tables
-  table = [
-    {  text: 'table1',selected: false},
-    {  text: 'table2', selected: false  },
-  ];
-  views = [
-    {  text: 'views1',selected: false},
-    {  text: 'views2', selected: false  },
-  ];
-  
-  schema=[
-    {  text: 'schema1',selected: false},
-    {  text: 'schema2', selected: false},
-  ]
-
-  database=[
-    {  text: 'database1',selected: false},
-    {  text: 'database2', selected: false  },
-  ]
-
-  list2:any = [
-    {  text: '',selected: false},
-];
-  ind:any
-summary:any 
-table1:any
-    constructor(){
-      {
-        //get api data in this format so i have to show these things in source and target component
-        this.summary=[
-           {
-              "table":[
-                 "CUSTOMERS",
-                 "emp",
-                 "abc",
-                 "pqr"
-              ]
-           },
-           {
-              "database":[
-                 "testDB"
-              ]
-           },
-           {
-              "schema":[
-                 "web"
-              ]
-           },
-           {
-              "view":[
-                 "Brazil_Customers",
-                 "Customers"
-              ]
-           }
-        ]
-     }
-        
-    // console.log('summary',this.summary[0]["table"][0])
-    console.log('summary',this.summary.table)
-
-  }
-  public toggleSelection(item:any, table:any) {
-    item.selected = !item.selected;
-    console.log('click on toggle');
-  }
-
-
-
-  public moveSelected(direction:any) {
-    if (direction === 'left') {
-    }
-     else {
-      console.log('else condition')
-      this.table.forEach(item  => {
-        if (item.selected){
-          this.list2.push(item);
-        }
-      });
-      this.views.forEach(item  => {
-        if (item.selected){
-          this.list2.push(item);
-        }
-      });
-      this.schema.forEach(item  => {
-        if (item.selected){
-          this.list2.push(item);
-        }
-      });
-      this.database.forEach(item  => {
-        if (item.selected){
-          this.list2.push(item);
-        }
-      });
-    
-    }
-    console.log('left selected')
-    
-  }
-
-  public moveAll(direction:any) {
-    
-    if (direction === 'left') {
-    } 
-   
-    else  {
-      this.list2 = [...this.list2,...this.table,...this.views,...this.schema,...this.database];
-      this.table = [...this.table];
-      this.views = [...this.views]
-      this.schema = [...this.schema]
-      this.database = [...this.database]
-
-    }
-  }
-
-  ngOnInit(): void {
-  }
-
+  singleSelect: any = null;
+  selectedEntity: any = null;
+  summary: any = null;
+  summary2 = [...initialSummary];
   isEditing: boolean = false;
-  enableEditIndex:any
+  enableEditIndex: any;
+  editingItem: null;
+  constructor() {
+    {
+      //get api data in this format so i have to show these things in source and target component
+      this.summary = [
+        {
+          table: ['CUSTOMERS', 'emp', 'abc', 'pqr'],
+        },
+        {
+          database: ['testDB'],
+        },
+        {
+          schema: ['web'],
+        },
+        {
+          view: ['Brazil_Customers', 'Customers'],
+        },
+      ];
+    }
 
-  switchEditMode(i:any) {
-    this.isEditing =true;
+    // console.log('summary',this.summary[0]["table"][0])
+    console.log('summary', this.summary[0]);
+  }
+  public toggleSelection(item: any, entity: string) {
+    this.singleSelect = item;
+    this.selectedEntity = entity;
+    console.log('click on toggle', this.singleSelect);
+  }
+
+  public moveSelected() {
+    const index = this.getIndex(this.selectedEntity);
+    this.summary2[index][this.selectedEntity].push(this.singleSelect);
+    this.singleSelect = null;
+    this.selectedEntity = null;
+  }
+
+  getIndex(entity: string): number {
+    const indexes: any = {
+      table: 0,
+      database: 1,
+      schema: 2,
+      view: 3,
+    };
+    return indexes[entity];
+  }
+
+  public moveAll() {
+    this.summary2 = [...this.summary];
+  }
+
+  ngOnInit(): void {}
+  switchEditMode(i: any, name: string) {
+    this.isEditing = true;
     this.enableEditIndex = i;
+    const entityIndex = this.getIndex(name);
+    this.editingItem = this.summary2[entityIndex][name][i];
   }
 
-  remove(i:any){
-    var index = this.list2.indexOf(i);
-    this.list2.splice(index, 1);
+  remove(i: any, name: string) {
+    const entityIndex = this.getIndex(name);
+    var index = this.summary2[entityIndex][name].indexOf(i);
+    this.summary2[entityIndex][name].splice(index, 1);
   }
-  save() {
+
+  save(i: number, name: string) {
+    const entityIndex = this.getIndex(name);
+    this.summary2[entityIndex][name][i] = this.editingItem;
     this.isEditing = false;
-    this.enableEditIndex = null;
+    this.enableEditIndex = i;
   }
 
   cancel() {
@@ -147,4 +102,11 @@ table1:any
     this.enableEditIndex = null;
   }
 
+  moveToSource() {
+    this.summary2 = [...initialSummary];
+  }
+
+  public keepOriginalOrder = (a: any, b: any) => {
+    return a.value;
+  };
 }
